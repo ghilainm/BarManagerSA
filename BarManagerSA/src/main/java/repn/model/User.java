@@ -28,12 +28,12 @@ public class User implements Serializable{
 	private String firstName;
 	private String lastName;
 	private Boolean isActive;
-	private Balance balance;
+	private Integer balance;
 	private Calendar createdOn;
 	
 	public User(){}
 	
-	public User(String mail, String login, String firstName, String lastName, Boolean isActive, Balance balance){
+	public User(String mail, String login, String firstName, String lastName, Boolean isActive, Integer balance){
 		this.mail = mail;
 		this.login = login;
 		this.firstName = firstName;
@@ -90,34 +90,37 @@ public class User implements Serializable{
 		this.userSeq = userSeq;
 	}
 
+	@Column(name="isActive")
 	public Boolean isActive() {
 		return isActive;
 	}
 	
-	@Column(name="isActive")
+	
 	public void setActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
 
+	@Column(name="createOn")
 	public Calendar getCreatedOn() {
 		return createdOn;
 	}
 
-	@Column(name="createOn")
+	
 	public void setCreatedOn(Calendar createdOn) {
 		this.createdOn = createdOn;
 	}
 	
-	public Balance getBalance() {
+	@Column(name="balance", nullable=false, updatable=true)
+	public Integer getBalance() {
 		return balance;
 	}
 
-	public void setBalance(Balance balance) {
+	public void setBalance(Integer balance) {
 		this.balance = balance;
 	}
 
 	public String toString(){
-		return "User [login: "+login+", mail: "+mail+", firstName: "+firstName+", lastName: "+lastName+", isActive: "+isActive+", createOn: "+DateUtils.format(createdOn)+"]";
+		return "User [login: "+login+", mail: "+mail+", firstName: "+firstName+", lastName: "+lastName+", isActive: "+isActive+", balance: "+balance+", createOn: "+DateUtils.format(createdOn)+"]";
 	}
 	
 }

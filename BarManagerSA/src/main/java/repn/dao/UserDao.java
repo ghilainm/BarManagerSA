@@ -4,12 +4,9 @@ import java.util.List;
 
 import repn.model.User;
 
-public interface UserDao {
+public interface UserDao extends Dao<User>{
 	
-	void save(User user);
-	void update(User user);
-	void delete(User user);
-	User findUserByLogin(String login);
+	User getUserByLogin(String login);
 	List<User> getAllUsers();
 	List<User> getAllUsers(boolean active);
 

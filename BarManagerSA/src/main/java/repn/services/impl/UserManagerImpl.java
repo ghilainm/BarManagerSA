@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import repn.dao.UserDao;
 import repn.model.User;
 import repn.services.UserManager;
-import repn.services.exception.UserAlreadyExistException;
+import repn.services.exception.ObjectAlreadyExistsException;
 
 @Transactional(isolation=Isolation.SERIALIZABLE)
 @Service()
@@ -24,9 +24,9 @@ public class UserManagerImpl implements UserManager{
 	}
 
 	@Override
-	public void save(User user) throws UserAlreadyExistException {
-		if(findUserByLogin(user.getLogin()) != null)
-			throw new UserAlreadyExistException();
+	public void save(User user) throws ObjectAlreadyExistsException {
+		if(getUserByLogin(user.getLogin()) != null)
+			throw new ObjectAlreadyExistsException();
 		userDao.save(user);
 	}
 
@@ -41,8 +41,8 @@ public class UserManagerImpl implements UserManager{
 	}
 
 	@Override
-	public User findUserByLogin(String login) {
-		return userDao.findUserByLogin(login);
+	public User getUserByLogin(String login) {
+		return userDao.getUserByLogin(login);
 	}
 
 	@Override
